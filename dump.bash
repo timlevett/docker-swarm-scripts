@@ -1,12 +1,10 @@
-docker run -d -p 8080:8080 -p 50000:50000 -v /Users/tlevett/jenkins:/var/jenkins_home jenkins
-
-docker service create --replicas 1 --name jenkins -p 8080:8080 -p 50000:50000 -v /Users/tlevett/jenkins:/var/jenkins_home jenkins
-
+# Sample docker service of nginx
 docker service create \
   --name my-service \
   --mount type=bind,source=/path/on/host,destination=/path/in/container \
   nginx:alpine
 
+#if you wanted to run the latest jenkins
   docker service create \
     --detach=true \
     --replicas 1 \
@@ -16,6 +14,7 @@ docker service create \
     --mount type=bind,source=/Users/tlevett/jenkins,destination=/var/jenkins_home \
     jenkins
 
+# Swarm visualizer, super helpful
 docker service create \
   --detach=true \
   --name=viz \
@@ -24,6 +23,7 @@ docker service create \
   --mount=type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
   dockersamples/visualizer
 
+# run mysql locally (change src to not have tlevett :D)
 docker service create \
   --detach=true \
   --name=mysql \
